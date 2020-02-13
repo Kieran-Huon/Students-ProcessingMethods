@@ -2,6 +2,7 @@
 
 namespace Library;
 
+use mysql_xdevapi\Exception;
 use Sourcecode\ProcessingMethod;
 
 class Process
@@ -20,7 +21,9 @@ class Process
 
     public function run()
     {
-        echo $this->_action;
+        if ($this->getProcessor())
+            echo $this->_action . "\n";
+        else throw new Exception('Impossible de lancer le processus sans un processeur');
         return $this;
     }
 
